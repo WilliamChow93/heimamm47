@@ -1,5 +1,8 @@
 <template>
-  <div>app.vue</div>
+  <div>
+    <router-link to="#">点我啊</router-link>
+  <router-view></router-view>
+  </div>
 </template>
 
 <script>
