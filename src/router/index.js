@@ -8,7 +8,7 @@ Vue.use(VueRouter)
 //这里就是路由的配制项
 const routes = [
     {
-        path: '/index',
+        path: '/',
         component: index
     },
 ]
