@@ -47,11 +47,17 @@
       </el-form>
     </div>
     <img src="./images/login_banner.png" alt />
+    <!-- 对话框 -->
+    <reg></reg>
   </div>
 </template>
 
 <script>
+import reg from './components/register.vue'
 export default {
+  components:{
+    reg,
+  },
   data() {
     return {
       //跟表单双向绑定的数据
@@ -147,11 +153,7 @@ export default {
       align-items: center;
       .agree {
         margin-right: 3px;
-        // display: flex;
-        // .el-checkbox__lable {
-        //   display: flex;
-        //   align-items: center;
-        // }
+        
       }
     }
     .login_btn {
