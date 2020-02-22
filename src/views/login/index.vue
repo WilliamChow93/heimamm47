@@ -42,21 +42,21 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" class="login_btn" @click="doLogin">登录</el-button>
-          <el-button type="primary" class="login_btn">注册</el-button>
+          <el-button type="primary" class="login_btn" @click="goReg">注册</el-button>
         </el-form-item>
       </el-form>
     </div>
     <img src="./images/login_banner.png" alt />
     <!-- 对话框 -->
-    <reg></reg>
+    <reg ref="reg"></reg>
   </div>
 </template>
 
 <script>
-import reg from './components/register.vue'
+import reg from "./components/register.vue";
 export default {
-  components:{
-    reg,
+  components: {
+    reg
   },
   data() {
     return {
@@ -90,6 +90,9 @@ export default {
           alert("验证成功!");
         }
       });
+    },
+    goReg() {
+      this.$refs.reg.dialogFormVisible = true;
     }
   }
 };
@@ -153,7 +156,6 @@ export default {
       align-items: center;
       .agree {
         margin-right: 3px;
-        
       }
     }
     .login_btn {
