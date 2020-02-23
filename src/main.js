@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 Vue.config.productionTip = false
+//注册element-ui
+Vue.use(ElementUI)
 // 导入路由对象
 import router from './router/index'
 // 导包element-ui
