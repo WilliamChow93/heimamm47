@@ -2,70 +2,95 @@
   <el-container class="my-container">
     <el-header class="my-header">
       <div class="left">
-        <i class="el-icon-s-fold"></i>
+        <!-- 字体图标 -->
+        <i
+          @click="isCollapse=!isCollapse"
+          
+          :class="isCollapse ? 'el-icon-s-unfold': 'el-icon-s-fold'"
+        ></i>
         <img class="logo" src="./images/logo.png" alt />
         <span>黑马面面</span>
       </div>
       <div class="right">
-        <img class="userLogo" src="./images/logo.png" alt />
-        <span class="user">娟娟宝贝,您好</span>
-        <el-button type="primary" @click="open">退出</el-button>
+        <img class="userLogo" :src="avatar" alt />
+        <span class="user">{{username}},您好</span>
+        <el-button type="primary" size="small" @click="logout">退出</el-button>
       </div>
     </el-header>
     <el-container>
-      <el-aside width="200px" class="my-aside">
-    <el-menu
-      default-active="2"
-      class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose" v-model="isCollapse">
-      <el-menu-item index="1">
-        <i class="el-icon-pie-chart"></i>
-        <span slot="title">数据概览</span>
-      </el-menu-item>
-      <el-menu-item index="2">
-        <i class="el-icon-user"></i>
-        <span slot="title">用户列表</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-edit-outline"></i>
-        <span slot="title">题库列表</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-office-building"></i>
-        <span slot="title">企业列表</span>
-      </el-menu-item>
-      <el-menu-item index="5">
-        <i class="el-icon-notebook-2"></i>
-        <span slot="title">学科列表</span>
-      </el-menu-item>
-    </el-menu>
+      <!-- 左侧栏 -->
+      <el-aside width="auto" class="my-aside">
+        <el-menu default-active="2" class="el-menu-vertical-demo" :collapse="isCollapse">
+          <el-menu-item index="1">
+            <i class="el-icon-pie-chart"></i>
+            <span slot="title">数据概览</span>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <i class="el-icon-user"></i>
+            <span slot="title">用户列表</span>
+          </el-menu-item>
+          <el-menu-item index="3">
+            <i class="el-icon-edit-outline"></i>
+            <span slot="title">题库列表</span>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <i class="el-icon-office-building"></i>
+            <span slot="title">企业列表</span>
+          </el-menu-item>
+          <el-menu-item index="5">
+            <i class="el-icon-notebook-2"></i>
+            <span slot="title">学科列表</span>
+          </el-menu-item>
+        </el-menu>
       </el-aside>
-      <el-main class="my-main">Main</el-main>
+      <!-- 右侧显示区 -->
+      <el-main class="my-main">
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
+import { info, logout } from "@/api/index.js";
+import { removeToken } from "@/utils/token.js";
 export default {
+  data() {
+    return {
+      username: "",
+      avatar: "",
+      isCollapse: false
+    };
+  },
   created() {
-    // info()
+    info().then(res => {
+      this.username = res.data.data.username;
+      this.avatar = process.env.VUE_APP_URL + "/" + res.data.data.avatar;
+      window.console.log(res);
+    });
   },
   methods: {
-    open() {
-    //   const h = this.$createElement;
-      this.$msgbox({
-        title: "是否退出",
-        message: "确定要退出吗?",
-        showCancelButton: true,
+    logout() {
+      this.$confirm("你将退出本系统,是否继续退出?", "是否退出", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-      }).then(action => {
-        this.$message({
-          type: "info",
-          message: "action: " + action
+        type: "warning"
+      })
+        .then(() => {
+          logout().then(res => {
+            if (res.data.code == 200) {
+              this.$message.success("退出成功!");
+              removeToken();
+              this.$router.push("/");
+            }
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消退出"
+          });
         });
-      });
     }
   }
 };
@@ -76,6 +101,7 @@ export default {
   height: 100%;
   .my-header {
     // background-color: pink;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     .left {
@@ -119,10 +145,14 @@ export default {
     }
   }
   .my-aside {
-    background-color: skyblue;
+    // background-color: skyblue;
   }
   .my-main {
-    background-color: #0074ff;
+    background-color: skyblue;
+  }
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
   }
 }
 </style>
