@@ -1,6 +1,7 @@
 import Vue from 'vue'
 // 0. 导入 子组件
-import index from '../views/login/index.vue'
+import login from '../views/login/index.vue'
+import index from '../views/index/index.vue'
 // 1. 导入 vue-router
 import VueRouter from 'vue-router'
 // 2. 注册 vue-router
@@ -9,6 +10,10 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/',
+        component: login
+    },
+    {
+        path: '/index',
         component: index
     },
 ]

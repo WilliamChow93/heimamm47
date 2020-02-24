@@ -194,7 +194,7 @@ export default {
     //这里访问this.sec,一定要用箭头函数,用function的话,里面的this是window
     getPhoneCode() {
       //判断手机号是否合法
-      if (!/0?(13|14|15|18|17)[0-9]{9}/.test(this.form.phone)) {
+      if (!(/0?(13|14|15|18|17)[0-9]{9}/.test(this.form.phone))) {
         return this.$message.error("手机号码格式不正确");
       }
       //判断验证码是否合法

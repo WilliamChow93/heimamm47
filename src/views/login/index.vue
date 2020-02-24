@@ -27,7 +27,7 @@
             <el-input v-model="form.code" placeholder="请输入验证码" prefix-icon="el-icon-key"></el-input>
           </el-col>
           <el-col :span="7">
-            <img class="code" src="./images/code.png" alt />
+            <img class="code" :src="imgUrl" @click="clickImg" alt />
           </el-col>
         </el-form-item>
         <el-form-item prop="checked">
@@ -54,12 +54,16 @@
 
 <script>
 import reg from "./components/register.vue";
+import { login } from "@/api/login.js";
+import {setToken} from "@/utils/token.js"
 export default {
   components: {
     reg
   },
   data() {
     return {
+      // 验证码的接口地址
+      imgUrl: process.env.VUE_APP_URL + "/captcha?type=login&sb" + Date.now(),
       //跟表单双向绑定的数据
       form: {
         checked: false,
@@ -87,12 +91,34 @@ export default {
     doLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          alert("验证成功!");
+          //调用登陆接口
+          login({
+            phone: this.form.phone,
+            password: this.form.password,
+            code: this.form.code
+          }).then(res => {
+            window.console.log(res)
+            if (res.data.code == 200) {
+              //把token存起来
+              // window.localStorage.setItem('token',res.data.data.token);
+              setToken(res.data.data.token);
+              this.$message.success("登陆成功！");
+              //跳转到index
+              this.$router.push('/index')
+            } else {
+              this.$message.error(res.data.message);
+            }
+          });
         }
       });
     },
     goReg() {
       this.$refs.reg.dialogFormVisible = true;
+    },
+    //刷新验证码
+    clickImg() {
+      this.imgUrl =
+        process.env.VUE_APP_URL + "/captcha?type=login&sb" + Date.now();
     }
   }
 };
