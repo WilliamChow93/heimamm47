@@ -1,6 +1,6 @@
 <template>
   <div>
-      我是子路由组件
+      我是study组件
   </div>
 </template>
 
