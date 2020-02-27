@@ -10,7 +10,9 @@ let indexkelong = axios.create({
 })
 // 添加请求拦截器
 indexkelong.interceptors.request.use(function (config) {
+    //config参数就是被拦截下来请求的配置
     window.console.log(config);
+    //把每次发的请求拦截下来,给他加上一个token值
     config.headers.token = getToken();
     // 在发送请求之前做些什么
     return config;

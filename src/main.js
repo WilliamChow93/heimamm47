@@ -5,6 +5,8 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 // 导入路由对象
 import router from './router/index'
+//导入vuex的对象
+import store from './store/index.js'
 // 导包element-ui
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -15,5 +17,6 @@ Vue.use(ElementUI);
 
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store,
 }).$mount('#app')
