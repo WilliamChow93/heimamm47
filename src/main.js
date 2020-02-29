@@ -10,6 +10,9 @@ import store from './store/index.js'
 // 导包element-ui
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+//导入全局过滤器
+//只要能执行里面的代码就行,所以简单的导入就行
+import '@/utils/filters.js'
 //导入base.css
 import '../src/style/base.css'
 //注册element-ui

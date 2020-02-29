@@ -6,7 +6,7 @@
         <el-form-item label="学科编号" prop="rid">
           <el-input class="short" v-model="formInline.rid"></el-input>
         </el-form-item>
-        <el-form-item label="学科姓名" prop="name">
+        <el-form-item label="学科名称" prop="name">
           <el-input class="long" v-model="formInline.name"></el-input>
         </el-form-item>
         <el-form-item label="创建者" prop="username">
@@ -117,7 +117,7 @@ export default {
     // params参数在studyList(page:2,limit:1,)传
     // studyList().then(res => {
     //   console.log(res);
-    //   this.tableData = res.data.data.items;
+      // this.tableData = res.data.data.items;
     // });
     //调用学科列表封装的函数
     this.getList();
@@ -126,7 +126,9 @@ export default {
     //删除点击事件
     delStudy(item) {
       console.log(item);
-      studtDel(item.id).then(res => {
+      studtDel({
+        id: item.id
+      }).then(res => {
         if (res.data.code == 200) {
           this.$message.success("删除成功!");
           this.getList();
@@ -134,7 +136,7 @@ export default {
           this.$message.error(res.data.message);
         }
         //判断是不是最后一条数据
-        if ((this.tableData.length = 1)) {
+        if (this.tableData.length == 1) {
           //显示上一页
           this.page--;
         }
