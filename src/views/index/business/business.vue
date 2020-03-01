@@ -118,6 +118,8 @@ export default {
 
     //搜索点击事件
     search() {
+      //当页面为第二页是,只会搜索第二页的内容,所以要设置会第一页
+      this.page = 1;
       //信息绑定了直接调用企业列表
       this.getList();
     },

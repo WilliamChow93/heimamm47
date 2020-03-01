@@ -117,7 +117,7 @@ export default {
     // params参数在studyList(page:2,limit:1,)传
     // studyList().then(res => {
     //   console.log(res);
-      // this.tableData = res.data.data.items;
+    // this.tableData = res.data.data.items;
     // });
     //调用学科列表封装的函数
     this.getList();
