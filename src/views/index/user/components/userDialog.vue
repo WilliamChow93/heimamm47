@@ -10,8 +10,8 @@
       <el-form-item label="电话" prop="phone" :label-width="formLabelWidth">
         <el-input v-model="form.phone" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item @change="role_id=role" label="角色" prop="role" :label-width="formLabelWidth">
-        <el-select v-model="form.role" placeholder="请选择角色">
+      <el-form-item  label="角色" prop="role" :label-width="formLabelWidth">
+        <el-select @change="form.role_id=form.role" v-model="form.role" placeholder="请选择角色">
           <el-option label="管理员" value="2"></el-option>
           <el-option label="老师" value="3"></el-option>
           <el-option label="学生" value="4"></el-option>

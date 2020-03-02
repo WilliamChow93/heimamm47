@@ -10,6 +10,8 @@ const store = new Vuex.Store({
         username: '',
         //用户头像
         avatar: '',
+        //角色
+        role:'',
     },
     mutations: {
         //用来修改用户名的方法
@@ -19,6 +21,10 @@ const store = new Vuex.Store({
         //用来修改用户头像的方法
         changeAvatar(state, val) {
             state.avatar = val
+        },
+        //用来修改用户头像的方法
+        changeRole(state, val) {
+            state.role = val
         }
     }
 })

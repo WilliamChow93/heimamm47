@@ -21,27 +21,17 @@
       <el-aside width="auto" class="my-aside">
         <!-- el-menu提供router模式,加上这个属性就是router模式
         加完后点击菜单,会自动以菜单的index属性值为路径跳转-->
-        <el-menu router default-active="2" class="el-menu-vertical-demo" :collapse="isCollapse">
-          <el-menu-item index="/index/information">
-            <i class="el-icon-pie-chart"></i>
-            <span slot="title">数据概览</span>
-          </el-menu-item>
-          <el-menu-item index="/index/user">
-            <i class="el-icon-user"></i>
-            <span slot="title">用户列表</span>
-          </el-menu-item>
-          <el-menu-item index="/index/question">
-            <i class="el-icon-edit-outline"></i>
-            <span slot="title">题库列表</span>
-          </el-menu-item>
-          <el-menu-item index="/index/business">
-            <i class="el-icon-office-building"></i>
-            <span slot="title">企业列表</span>
-          </el-menu-item>
-          <el-menu-item index="/index/study">
-            <i class="el-icon-notebook-2"></i>
-            <span slot="title">学科列表</span>
-          </el-menu-item>
+        <el-menu router default-active="1" class="el-menu-vertical-demo" :collapse="isCollapse">
+          <template v-for="(item, index) in childrenRouter">
+            <el-menu-item
+              :key="index"
+              :index="'/index/'+ item.path"
+              v-if="item.meta.roles.includes($store.state.role)"
+            >
+              <i class="el-icon-pie-chart"></i>
+              <span slot="title">{{item.meta.title}}</span>
+            </el-menu-item>
+          </template>
         </el-menu>
       </el-aside>
       <!-- 右侧显示区 -->
@@ -55,6 +45,8 @@
 <script>
 import { logout } from "@/api/index.js";
 import { removeToken, getToken } from "@/utils/token.js";
+// childrenRouter里面就是一个数组
+import childrenRouter from "@/router/childrenRouter.js";
 export default {
   //要判断是否有登录,越早越好,所以要在beforeCreate里面
   // 判断token是否为空,空代表没登录返回登录页面
@@ -66,6 +58,8 @@ export default {
   },
   data() {
     return {
+      // 把路由的规则数组存到data
+      childrenRouter,
       username: "",
       avatar: "",
       isCollapse: false
