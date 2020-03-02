@@ -22,7 +22,7 @@ const store = new Vuex.Store({
         changeAvatar(state, val) {
             state.avatar = val
         },
-        //用来修改用户头像的方法
+        //用来修改角色的方法
         changeRole(state, val) {
             state.role = val
         }

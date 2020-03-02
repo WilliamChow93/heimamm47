@@ -49,7 +49,7 @@
         <!-- 自定义列在el-table-column里写template，在加一个slot-scope=“scope”属性 -->
         <!-- scope.row就是这一行的数据
         scope.$index就是这一行的索引-->
-        <el-table-column label="操作">
+        <el-table-column label="操作" v-if="['超级管理员','管理员','老师'].includes($store.state.role)">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="showEdit(scope.row)">编辑</el-button>
             <el-button
@@ -57,7 +57,7 @@
               size="small"
               @click="openClick(scope.row)"
             >{{scope.row.status==1 ? '禁用':'启用'}}</el-button>
-            <el-button type="text" size="small" @click="delStudy(scope.row)">删除</el-button>
+            <el-button type="text" size="small" @click="delStudy(scope.row)" v-if="['超级管理员','管理员'].includes($store.state.role)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
