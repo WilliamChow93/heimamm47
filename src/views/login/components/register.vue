@@ -28,11 +28,11 @@
       <el-form-item label="邮箱" :label-width="formLabelWidth" prop="email">
         <el-input v-model="form.email" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="手机" :label-width="formLabelWidth" prop="phone">
+      <el-form-item  label="手机" :label-width="formLabelWidth" prop="phone">
         <el-input v-model="form.phone" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="密码" password :label-width="formLabelWidth" prop="password">
-        <el-input v-model="form.password" autocomplete="off"></el-input>
+      <el-form-item label="密码" :label-width="formLabelWidth" prop="password">
+        <el-input show-password v-model="form.password" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="图形码" :label-width="formLabelWidth" prop="imgcode">
         <el-col :span="16">
@@ -102,7 +102,7 @@ export default {
         ],
         password: [
           { required: true, message: "密码不能为空", trigger: "blur" },
-          { min: 5, max: 14, message: "长度在5-14之间", trigger: "change" }
+          // { min: 5, max: 14, message: "长度在5-14之间", trigger: "change" }
         ],
         phone: [
           { required: true, message: "手机号不能为空", trigger: "blur" },

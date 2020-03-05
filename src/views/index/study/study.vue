@@ -232,14 +232,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .box-card {
   margin-bottom: 19px;
 }
 .short {
-  width: 100px !important;
+  width: 100px;
 }
 .long {
-  width: 149px !important;
+  width: 149px;
 }
 </style>

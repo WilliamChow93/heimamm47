@@ -7,6 +7,12 @@ Vue.use(ElementUI)
 import router from './router/index'
 //导入vuex的对象
 import store from './store/index.js'
+//导入全局组件studySelect
+import studySelect from './components/studySelect.vue'
+Vue.component('studySelect', studySelect)
+//导入全局组件businessSelect
+import businessSelect from './components/businessSelect.vue'
+Vue.component('businessSelect', businessSelect)
 // 导包element-ui
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';

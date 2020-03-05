@@ -12,7 +12,7 @@
       <!-- 表单 -->
       <el-form ref="loginForm" :model="form" label-width="43px" :rules="rules">
         <el-form-item prop="phone">
-          <el-input v-model="form.phone" placeholder="请输入手机号" prefix-icon="el-icon-user"></el-input>
+          <el-input v-model="form.phone" placeholder="请输入手机号" prefix-icon="el-icon-user" ></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
@@ -66,10 +66,11 @@ export default {
       imgUrl: process.env.VUE_APP_URL + "/captcha?type=login&sb" + Date.now(),
       //跟表单双向绑定的数据
       form: {
-        checked: false,
-        phone: "",
-        password: "",
-        code: ""
+        checked: true,
+        phone: "13800138000",
+        password: "123456",
+        code: "",
+        agree: true
       },
       rules: {
         //真正的规则
@@ -124,7 +125,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .login-wrap {
   width: 100%;
   height: 100%;
