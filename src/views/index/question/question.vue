@@ -107,6 +107,7 @@
     </el-card>
     <!-- 弹框 -->
     <questionAdd ref="questionAdd"></questionAdd>
+    <questionEdit ref="questionEdit"></questionEdit>
   </div>
 </template>
 
@@ -117,7 +118,10 @@ import {
   questionStatus,
   questionRemove
 } from "@/api/question.js";
+// 导入新增的对话框
 import questionAdd from "./components/questionAdd";
+// 导入编辑的对话框
+import questionEdit from "./components/questionEdit.vue";
 export default {
   name: "question",
   data() {
@@ -133,7 +137,8 @@ export default {
     };
   },
   components: {
-    questionAdd
+    questionAdd,
+    questionEdit
   },
   created() {
     //企业
@@ -222,19 +227,12 @@ export default {
     },
     //新增点击事件
     newQuestion() {
-      //设置isadd属性为true
-      this.$refs.questionAdd.isAdd = true;
       //打开新增弹框
       this.$refs.questionAdd.dialogFormVisible = true;
-      // 还要把表单内容清空
-      this.$refs.questionAdd.form = {};
+      
     },
     //编辑点击事件
     getEdit(item) {
-      //打开编辑窗口
-      this.$refs.questionAdd.dialogFormVisible = true;
-      //设置isadd属性为false
-      this.$refs.questionAdd.isAdd = false;
       //把题目列表的信息赋值到对话框
       this.$refs.questionAdd.form = { ...item };
       //获取数据时,城市和对选题是字符串,需要给成数值才能显示出来
@@ -244,6 +242,8 @@ export default {
       this.$refs.questionAdd.form.multiple_select_answer = this.$refs.questionAdd.form.multiple_select_answer.split(
         ","
       );
+      //打开编辑窗口
+      this.$refs.questionAdd.dialogFormVisible = true;
     },
     //封装题目列表
     getList() {

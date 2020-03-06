@@ -2,15 +2,15 @@
 //导入index里的子组件
 import user from '../views/index/user/user.vue'
 import business from '../views/index/business/business.vue'
-import information from '../views/index/information/information.vue'
+import chart from '../views/index/chart/chart.vue'
 import question from '../views/index/question/question.vue'
 import study from '../views/index/study/study.vue'
 //把这个数组暴露出去
 export default [
     // 子路由一般不加/
     {
-        path: "information",
-        component: information,
+        path: "chart",
+        component: chart,
         meta: {
             title: '数据概览',
             roles: ['超级管理员', '管理员'],
